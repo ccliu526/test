@@ -1,0 +1,24 @@
+<h2>login: Model driven</h2>
+
+<form [formGroup]="myForm" (ngSubmit)="save()">
+
+*帳號：<input type="text" formControlName="account" />
+<div class="errors" *ngIf="myForm.controls.account.errors">
+  <span *ngIf="myForm.controls.account.errors.required">必填項目</span>
+  <span *ngIf="myForm.controls.account.errors.pattern">請輸入正確的 Email 格式</span>
+</div>
+<br/>
+*密碼：<input type="text" formControlName="password"/>
+<div class="errors" *ngIf="myForm.controls.password.errors">
+  <span *ngIf="myForm.controls.password.errors.required">必填項目</span>
+  <span *ngIf="myForm.controls.password.errors.minlength">最少要 5 個字</span>
+</div>
+<br/>
+<button type="submit" [disabled] = "!myForm.valid">送出</button>
+</form>
+
+<hr/>
+<pre *ngIf = "submitted">
+  {{myForm.value | json}}
+</pre>
+

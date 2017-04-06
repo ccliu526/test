@@ -1,0 +1,30 @@
+<h2>login: Template driven</h2>
+
+<form #myForm="ngForm" (ngSubmit)="save()">
+
+*帳號：<input type="text" name = "account" [ngModel]="account"     
+        required
+        pattern="^[a-zA-Z0-9.!#$%&』*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+        #iaccount="ngModel"/>
+<div class="errors" *ngIf="iaccount.errors">
+	<span *ngIf="iaccount.errors.required">必填項目</span>
+	<span *ngIf="iaccount.errors.pattern">請輸入正確的 Email 格式</span>
+</div>        
+<br/>
+*密碼：<input type="text" name = "password" [ngModel]="password"
+        required
+        minlength="5"
+        #ipassword="ngModel"
+        />
+<div class="errors" *ngIf="ipassword.errors">
+	<span *ngIf="ipassword.errors.required">必填項目</span>
+	<span *ngIf="ipassword.errors.minlength">最少要 5 個字</span>
+</div> 
+<br/> 
+<button type="submit" [disabled] = "!myForm.valid">送出</button>
+</form>
+
+<hr/>
+<pre *ngIf = "submitted">
+  {{myForm.value | json}}
+</pre>
